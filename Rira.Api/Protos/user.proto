@@ -1,0 +1,19 @@
+syntax = "proto3";
+option csharp_namespace = "Rira.Api";
+package rira.api;
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (UserReply);
+  rpc GetUser (GetUserRequest) returns (UserReply);
+  rpc ListUsers (ListUsersRequest) returns (ListUsersReply);
+  rpc UpdateUser (UpdateUserRequest) returns (UserReply);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
+}
+message UserReply { int32 id = 1; string first_name = 2; string last_name = 3; string national_code = 4; string birth_date = 5; }
+message CreateUserRequest { string first_name = 1; string last_name = 2; string national_code = 3; string birth_date = 4; }
+message GetUserRequest { int32 id = 1; }
+message ListUsersRequest { int32 page = 1; int32 page_size = 2; }
+message ListUsersReply { repeated UserReply items = 1; int32 page = 2; int32 page_size = 3; int32 total_count = 4; }
+message UpdateUserRequest { int32 id = 1; string first_name = 2; string last_name = 3; string national_code = 4; string birth_date = 5; }
+message DeleteUserRequest { int32 id = 1; }
+message DeleteUserReply { bool deleted = 1; }
